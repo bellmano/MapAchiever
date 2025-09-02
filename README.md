@@ -1,5 +1,13 @@
 # :world_map: MapAchiever
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=bellmano_FlappyASCII&metric=alert_status)](https://sonarcloud.io/summary/overall?id=bellmano_FlappyASCII)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=bellmano_FlappyASCII&metric=security_rating)](https://sonarcloud.io/summary/overall?id=bellmano_FlappyASCII)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=bellmano_FlappyASCII&metric=sqale_rating)](https://sonarcloud.io/summary/overall?id=bellmano_FlappyASCII)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=bellmano_FlappyASCII&metric=reliability_rating)](https://sonarcloud.io/summary/overall?id=bellmano_FlappyASCII)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=bellmano_FlappyASCII&metric=bugs)](https://sonarcloud.io/summary/overall?id=bellmano_FlappyASCII)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=bellmano_FlappyASCII&metric=vulnerabilities)](https://sonarcloud.io/summary/overall?id=bellmano_FlappyASCII)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=bellmano_FlappyASCII&metric=code_smells)](https://sonarcloud.io/summary/overall?id=bellmano_FlappyASCII)
+
 MapAchiever is a World of Warcraft addon that will show your characters Dungeon and Raid progression on each difficulty by hovering over the Dungeon/Raid icon on the world map.
 
 ## :briefcase: Screenshots
