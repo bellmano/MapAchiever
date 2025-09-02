@@ -1,12 +1,12 @@
 # :world_map: MapAchiever
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=bellmano_MapAchiever&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=bellmano_MapAchiever)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=bellmano_MapAchiever&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=bellmano_MapAchiever)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=bellmano_MapAchiever&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=bellmano_MapAchiever)
-[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=bellmano_MapAchiever&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=bellmano_MapAchiever)
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=bellmano_MapAchiever&metric=bugs)](https://sonarcloud.io/summary/new_code?id=bellmano_MapAchiever)
-[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=bellmano_MapAchiever&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=bellmano_MapAchiever)
-[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=bellmano_MapAchiever&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=bellmano_MapAchiever)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=bellmano_MapAchiever&metric=alert_status)](https://sonarcloud.io/summary/overall?id=bellmano_MapAchiever)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=bellmano_MapAchiever&metric=security_rating)](https://sonarcloud.io/summary/overall?id=bellmano_MapAchiever)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=bellmano_MapAchiever&metric=sqale_rating)](https://sonarcloud.io/summary/overall?id=bellmano_MapAchiever)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=bellmano_MapAchiever&metric=reliability_rating)](https://sonarcloud.io/summary/overall?id=bellmano_MapAchiever)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=bellmano_MapAchiever&metric=bugs)](https://sonarcloud.io/summary/overall?id=bellmano_MapAchiever)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=bellmano_MapAchiever&metric=vulnerabilities)](https://sonarcloud.io/summary/overall?id=bellmano_MapAchiever)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=bellmano_MapAchiever&metric=code_smells)](https://sonarcloud.io/summary/overall?id=bellmano_MapAchiever)
 
 MapAchiever is a World of Warcraft addon that will show your characters Dungeon and Raid progression on each difficulty by hovering over the Dungeon/Raid icon on the world map.
 
