@@ -1,4 +1,4 @@
-name: SonarScan
+name: Sonarscan
 on:
   push:
     branches:
