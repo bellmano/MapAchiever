@@ -26,6 +26,10 @@ Get [latest release](https://github.com/bellmano/MapAchiever/releases) and move 
 
 `\World of Warcraft\_retail_\Interface\AddOns`
 
+## :handshake: Contributing
+
+Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
 ## :mega: Issues or Suggestions
 Any issues or suggestions, please [create an issue on Github](https://github.com/bellmano/MapAchiever/issues).
 
