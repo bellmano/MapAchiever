@@ -34,7 +34,6 @@ Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for gui
 Any issues or suggestions, please [create an issue on Github](https://github.com/bellmano/MapAchiever/issues).
 
 ## :coffee: Buy me a coffee
-Donations are welcome to appreciate my work to keep this addon alive, but isn't required at all.
+Donations are welcome to appreciate my work to keep this project alive, but isn't required at all.
 
-<!-- PayPal icon/button is used from this GitHub repo: https://github.com/andreostrovsky/donate-with-paypal -->
-<a href="https://www.paypal.me/bellmano1"><img src="img/paypal.svg" height="50"></a>
+<a href="https://ko-fi.com/bellmano"><img src="img/bellmano-kofi.jpg" width="50%"></a>
