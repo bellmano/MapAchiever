@@ -1,0 +1,38 @@
+name: Release / Deploy
+
+on:
+  workflow_dispatch
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Package
+        id: package
+        run: |
+          VERSION=$(cat semver.txt)
+          ZIP_NAME="MapAchiever-v${VERSION}.zip"
+          ZIP_PATH="${{ runner.temp }}/${ZIP_NAME}"
+          echo "version=$VERSION"   >> $GITHUB_OUTPUT
+          echo "zip_name=$ZIP_NAME" >> $GITHUB_OUTPUT
+          echo "zip_path=$ZIP_PATH" >> $GITHUB_OUTPUT
+          zip -r "$ZIP_PATH" MapAchiever/
+
+      # Creates the git tag and GitHub Release, and attaches the .zip as a release asset.
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.package.outputs.version }}
+          name: v${{ steps.package.outputs.version }}
+          draft: false
+          prerelease: false
+          files: ${{ steps.package.outputs.zip_path }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,7 +1,7 @@
-## Interface: 110002, 110005
+## Interface: 120001, 110207, 120000
 ## Title: MapAchiever
 ## Notes: Show your characters Dungeon and Raid progression on each difficulty by hovering over the Dungeon/Raid icon on the world map.
-## Version: 1.0.1
+## Version: 1.0.2
 ## IconTexture: Interface\Icons\icon_treasuremap.png
 ## Author: Mattias Mälman / Bellmano
 
