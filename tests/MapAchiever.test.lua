@@ -30,8 +30,9 @@ describe("MapAchiever", function()
         printed                = nil
 
         -- ---- WoW global stubs -----------------------------------------------
+        -- Use _G explicitly so dofile'd code (which runs in _G) can see them.
 
-        WorldMapFrame = {
+        _G.WorldMapFrame = {
             ScrollContainer = {
                 GetChildren = function()
                     local mockAreaText = {
@@ -50,7 +51,7 @@ describe("MapAchiever", function()
             },
         }
 
-        EventRegistry = {
+        _G.EventRegistry = {
             RegisterCallback = function(_, event, fn)
                 registeredCallbacks[event] = registeredCallbacks[event] or {}
                 table.insert(registeredCallbacks[event], fn)
@@ -63,38 +64,38 @@ describe("MapAchiever", function()
                 frameScripts[scriptType] = fn
             end,
         }
-        CreateFrame = function() return mockEventFrame end
+        _G.CreateFrame = function() return mockEventFrame end
 
-        C_AddOns = {
+        _G.C_AddOns = {
             IsAddOnLoaded = function(name) return loadedAddons[name] or false end,
             LoadAddOn     = function(name) loadedAddons[name] = true end,
         }
 
-        AchievementFrame = {
+        _G.AchievementFrame = {
             IsVisible    = function() return achievementFrameVisible end,
             selectedTab  = achievementFrameTab,
         }
 
-        AchievementFrameTab_OnClick   = function(tab) tabClicked = tab end
-        ClearAchievementSearchString  = function() searchCleared = searchCleared + 1 end
-        SetAchievementSearchString    = function(str) searchString = str end
+        _G.AchievementFrameTab_OnClick   = function(tab) tabClicked = tab end
+        _G.ClearAchievementSearchString  = function() searchCleared = searchCleared + 1 end
+        _G.SetAchievementSearchString    = function(str) searchString = str end
 
         -- RunNextFrame executes the callback immediately in tests
-        RunNextFrame = function(fn) fn() end
+        _G.RunNextFrame = function(fn) fn() end
 
-        GetNumFilteredAchievements = function() return filteredCount end
-        GetFilteredAchievementID   = function(idx) return filteredIds[idx] or idx end
-        GetAchievementCategory     = function(aID) return aID end
-        GetCategoryInfo            = function(catID)
+        _G.GetNumFilteredAchievements = function() return filteredCount end
+        _G.GetFilteredAchievementID   = function(idx) return filteredIds[idx] or idx end
+        _G.GetAchievementCategory     = function(aID) return aID end
+        _G.GetCategoryInfo            = function(catID)
             return nil, categoryParents[catID] or 0
         end
-        GetAchievementInfo = function(aID)
+        _G.GetAchievementInfo = function(aID)
             local info = achievementInfos[aID] or {}
             return nil, info.name or "Unnamed", nil, info.completed or false
         end
-        GetStatistic = function(aID) return achievementStats[aID] end
+        _G.GetStatistic = function(aID) return achievementStats[aID] end
 
-        print = function(...) printed = table.concat({ tostring(select(1,...)), tostring(select(2,...)) }, " ") end
+        _G.print = function(...) printed = table.concat({ tostring(select(1,...)), tostring(select(2,...)) }, " ") end
 
         -- ---- Load the addon fresh for each test ----------------------------
         dofile("MapAchiever/MapAchiever.lua")
@@ -114,7 +115,7 @@ describe("MapAchiever", function()
         it("loads the addon and clicks tab 3 when not loaded and frame is hidden", function()
             loadedAddons["Blizzard_AchievementUI"] = false
             achievementFrameVisible = false
-            AchievementFrame.selectedTab = 1
+            _G.AchievementFrame.selectedTab = 1
 
             updateHover(nil, { pinTemplate = "DungeonEntrancePinTemplate", name = "Test", journalInstanceID = 1 })
 
@@ -135,7 +136,7 @@ describe("MapAchiever", function()
         it("skips tab click when selectedTab is already 3", function()
             loadedAddons["Blizzard_AchievementUI"] = false
             achievementFrameVisible = false
-            AchievementFrame.selectedTab = 3
+            _G.AchievementFrame.selectedTab = 3
 
             updateHover(nil, { pinTemplate = "DungeonEntrancePinTemplate", name = "T", journalInstanceID = 1 })
 
