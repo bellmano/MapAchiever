@@ -26,16 +26,15 @@ jobs:
         run: |
           luarocks install busted
           luarocks install luacov
-          luarocks install luacov-reporter-lcov
 
       - name: Run tests with coverage
         run: busted --coverage tests/MapAchiever.test.lua
 
       - name: Generate coverage report for SonarQube
         run: |
-          luacov
-          mkdir -p coverage
-          python3 tests/lcov_to_sonar.py luacov.report.out coverage/sonar-coverage.xml
+          python3 tests/stats_to_sonar.py luacov.stats.out coverage/sonar-coverage.xml
+          echo "--- sonar-coverage.xml ---"
+          cat coverage/sonar-coverage.xml
 
       - name: Sonarscan
         uses: SonarSource/sonarqube-scan-action@1a6d90ebcb0e6a6b1d87e37ba693fe453195ae25
