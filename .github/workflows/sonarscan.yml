@@ -8,11 +8,35 @@ on:
 jobs:
   sonarqube:
     name: Sonarscan
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+
+      - name: Set up Lua
+        uses: leafo/gh-actions-lua@v10
+        with:
+          luaVersion: "5.4"
+
+      - name: Set up LuaRocks
+        uses: leafo/gh-actions-luarocks@v4
+
+      - name: Install test dependencies
+        run: |
+          luarocks install busted
+          luarocks install luacov
+          luarocks install luacov-reporter-lcov
+
+      - name: Run tests with coverage
+        run: busted --coverage tests/MapAchiever.test.lua
+
+      - name: Generate lcov coverage report
+        run: |
+          luacov
+          mkdir -p coverage
+          cp luacov.report.out coverage/lcov.info
+
       - name: Sonarscan
         uses: SonarSource/sonarqube-scan-action@1a6d90ebcb0e6a6b1d87e37ba693fe453195ae25
         env:
