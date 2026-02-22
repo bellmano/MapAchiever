@@ -32,6 +32,8 @@ jobs:
 
       - name: Generate coverage report for SonarQube
         run: |
+          echo "--- luacov.stats.out ---"
+          cat luacov.stats.out || echo "(file not found)"
           python3 tests/stats_to_sonar.py luacov.stats.out coverage/sonar-coverage.xml
           echo "--- sonar-coverage.xml ---"
           cat coverage/sonar-coverage.xml

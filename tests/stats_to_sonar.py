@@ -102,9 +102,6 @@ def convert(stats_path: str, out_path: str, source_filter: str = "") -> None:
             add_file_coverage(root, file_path, hit_lines)
     write_xml(root, out_path)
     print_summary(root, out_path)
-    cov = 100.0 * (total - uncov) / total if total else 0.0
-    print(f"Written: {out_path}")
-    print(f"Coverage: {total - uncov}/{total} lines covered ({cov:.1f}%)")
 
 
 if __name__ == "__main__":
