@@ -36,3 +36,67 @@ jobs:
           files: ${{ steps.package.outputs.zip_path }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload to CurseForge
+        env:
+          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
+          CF_PROJECT_ID: "993776"
+        run: |
+          set -euo pipefail
+
+          # --- 1. Convert .toc Interface numbers to version strings ----------
+          RAW=$(grep -oP '## Interface:\s*\K.*' MapAchiever/MapAchiever.toc)
+          WANTED_VERSIONS=()
+          for iface in $(echo "$RAW" | tr ',' ' '); do
+            iface=$(echo "$iface" | tr -d '[:space:]')
+            major=$((iface / 10000))
+            minor=$(( (iface % 10000) / 100 ))
+            patch=$((iface % 100))
+            WANTED_VERSIONS+=("${major}.${minor}.${patch}")
+          done
+          echo "WoW versions from .toc: ${WANTED_VERSIONS[*]}"
+
+          # --- 2. Fetch game versions from CurseForge -----------------------
+          CF_VERSIONS=$(curl -sf \
+            -H "X-Api-Token: $CURSEFORGE_TOKEN" \
+            "https://wow.curseforge.com/api/game/versions")
+
+          # --- 3. Resolve version strings to CurseForge IDs -----------------
+          VERSION_IDS="[]"
+          for v in "${WANTED_VERSIONS[@]}"; do
+            id=$(echo "$CF_VERSIONS" | jq -r \
+              --arg name "$v" \
+              '[.[] | select(.name == $name) | .id] | first // empty')
+            if [ -n "$id" ]; then
+              VERSION_IDS=$(echo "$VERSION_IDS" | jq ". + [$id]")
+              echo "  Matched $v -> CF id $id"
+            else
+              echo "  WARNING: no CurseForge ID for version $v"
+            fi
+          done
+
+          if [ "$(echo "$VERSION_IDS" | jq 'length')" -eq 0 ]; then
+            echo "::error::Could not resolve any game versions — aborting upload."
+            exit 1
+          fi
+
+          # --- 4. Build metadata and upload ----------------------------------
+          METADATA=$(jq -nc \
+            --argjson versions "$VERSION_IDS" \
+            --arg display "MapAchiever v${{ steps.package.outputs.version }}" \
+            '{
+              changelog: "See the GitHub release for full details.",
+              changelogType: "text",
+              displayName: $display,
+              gameVersions: $versions,
+              releaseType: "release"
+            }')
+
+          echo "Uploading ${{ steps.package.outputs.zip_name }} to CurseForge project $CF_PROJECT_ID ..."
+          RESPONSE=$(curl -sf \
+            -H "X-Api-Token: $CURSEFORGE_TOKEN" \
+            -F "metadata=$METADATA" \
+            -F "file=@${{ steps.package.outputs.zip_path }}" \
+            "https://wow.curseforge.com/api/projects/${CF_PROJECT_ID}/upload-file")
+
+          echo "CurseForge response: $RESPONSE"
