@@ -32,12 +32,14 @@ jobs:
 
       - name: Generate coverage report for SonarQube
         run: |
-          echo "--- first 5 lines of luacov.stats.out ---"
-          head -5 luacov.stats.out
           lua tests/dump_stats.lua luacov.stats.out | python3 tests/stats_to_sonar.py - coverage/sonar-coverage.xml
+          echo "Coverage file location: $(realpath coverage/sonar-coverage.xml)"
           cat coverage/sonar-coverage.xml
 
       - name: Sonarscan
         uses: SonarSource/sonarqube-scan-action@1a6d90ebcb0e6a6b1d87e37ba693fe453195ae25
+        with:
+          args: >
+            -Dsonar.verbose=true
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
