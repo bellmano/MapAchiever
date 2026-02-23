@@ -15,19 +15,6 @@ import sys
 import os
 
 
-def is_executable(src_line: str) -> bool:
-    stripped = src_line.strip()
-    return bool(stripped) and not stripped.startswith("--")
-
-
-def executable_lines(source_path: str) -> set:
-    try:
-        with open(source_path, encoding="utf-8") as fh:
-            return {i + 1 for i, ln in enumerate(fh) if is_executable(ln)}
-    except FileNotFoundError:
-        return set()
-
-
 def parse_csv(stream) -> dict:
     result = {}
     current_path = None
@@ -62,16 +49,8 @@ def should_skip(file_path: str) -> bool:
     return "test" in lower or "luarocks" in lower
 
 
-def resolve_exec_lines(rel_path: str, hit_lines: dict, repo_root: str) -> set:
-    for candidate in (rel_path, os.path.join(repo_root, rel_path)):
-        lines = executable_lines(candidate)
-        if lines:
-            return lines
-    return set(hit_lines.keys())
-
-
-def write_file_block(out, rel_path: str, hit_lines: dict, repo_root: str) -> tuple:
-    exec_lines = resolve_exec_lines(rel_path, hit_lines, repo_root)
+def write_file_block(out, rel_path: str, hit_lines: dict) -> tuple:
+    exec_lines = set(hit_lines.keys())
     if not exec_lines:
         return 0, 0
     total = covered = 0
@@ -95,7 +74,7 @@ def write_lcov(stats: dict, out_path: str, repo_root: str) -> None:
             print(f"  {'SKIP' if should_skip(rel_path) else 'ADD ':4s} {rel_path}")
             if should_skip(rel_path):
                 continue
-            t, c = write_file_block(out, rel_path, hit_lines, repo_root)
+            t, c = write_file_block(out, rel_path, hit_lines)
             total += t
             covered += c
     cov = 100.0 * covered / total if total else 0.0

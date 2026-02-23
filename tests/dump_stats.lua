@@ -21,9 +21,8 @@ local function emit_file(filename, hits_line)
     local i = 1
     for hits in hits_line:gmatch("%S+") do
         local n = tonumber(hits) or 0
-        if n > 0 then
-            io.write(i .. "," .. n .. "\n")
-        end
+        -- emit ALL lines (including 0-hit) so Python uses luacov as sole authority
+        io.write(i .. "," .. n .. "\n")
         i = i + 1
     end
     io.write("END\n")
