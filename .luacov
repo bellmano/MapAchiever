@@ -1,5 +1,0 @@
-return {
-    -- Only track coverage for the addon source, not the test file itself
-    include = { "MapAchiever" },
-    exclude = { "tests" },
-}
