@@ -2,9 +2,6 @@
 luacov.stats.out
 luacov.report.out
 
-# lcov report folder
-coverage/
-
 # IDE files
 .idea/
 *.swp

@@ -30,16 +30,13 @@ jobs:
       - name: Run tests with coverage
         run: busted --coverage tests/MapAchiever.test.lua
 
-      - name: Generate lcov coverage report
-        run: |
-          lua tests/dump_stats.lua luacov.stats.out | python3 tests/stats_to_sonar.py - coverage/lcov.info
-          echo "--- lcov.info contents ---"
-          cat coverage/lcov.info
+      - name: Generate luacov report
+        run: luacov
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v5
         with:
-          files: coverage/lcov.info
+          files: luacov.report.out
           fail_ci_if_error: true
           verbose: true
         env:
