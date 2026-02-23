@@ -30,16 +30,17 @@ jobs:
       - name: Run tests with coverage
         run: busted --coverage tests/MapAchiever.test.lua
 
-      - name: Generate coverage report for SonarQube
+      - name: Generate lcov coverage report
         run: |
-          lua tests/dump_stats.lua luacov.stats.out | python3 tests/stats_to_sonar.py - coverage/sonar-coverage.xml
-          echo "Coverage file location: $(realpath coverage/sonar-coverage.xml)"
-          cat coverage/sonar-coverage.xml
+          lua tests/dump_stats.lua luacov.stats.out | python3 tests/stats_to_sonar.py - coverage/lcov.info
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          files: coverage/lcov.info
+          fail_ci_if_error: false
 
       - name: Sonarscan
         uses: SonarSource/sonarqube-scan-action@1a6d90ebcb0e6a6b1d87e37ba693fe453195ae25
-        with:
-          args: >
-            -Dsonar.verbose=true
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
