@@ -1,4 +1,4 @@
-## Interface: 120001, 110207, 120000
+## Interface: 120007,11508,20505,50504
 ## Title: MapAchiever
 ## Notes: Show your characters Dungeon and Raid progression on each difficulty by hovering over the Dungeon/Raid icon on the world map.
 ## Version: 1.0.4
