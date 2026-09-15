@@ -1,6 +1,12 @@
 {
+    "git.autofetch": true,
+    "[lua]": {
+        "editor.defaultFormatter": "JohnnyMorganz.stylua",
+        "editor.formatOnSave": true
+    },
     "sonarlint.connectedMode.project": {
         "connectionId": "bellmano",
         "projectKey": "bellmano_MapAchiever"
-    }
+    },
+    "stylua.targetReleaseVersion": "latest"
 }

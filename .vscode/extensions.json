@@ -1,5 +1,6 @@
 {
 	"recommendations": [
+		"JohnnyMorganz.stylua",
 		"SonarSource.sonarlint-vscode"
 	]
 }
