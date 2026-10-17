@@ -13,7 +13,21 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-          
+
+      - name: Install Lua coverage tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends lua5.1 luarocks
+          sudo luarocks --lua-version=5.1 install luacov
+
+      - name: Test and measure coverage
+        run: |
+          mkdir -p coverage
+          export LUACOV_CONFIG=tools/.luacov
+          lua5.1 -lluacov tests/run.lua
+          lua5.1 tools/sonar_coverage.lua
+          lua5.1 tools/check_coverage.lua
+
       - name: Sonarscan
         uses: SonarSource/sonarqube-scan-action@22918119ff8e1ca75a623e15c8296b6ea4fbe28f # v8.2.1
         env:
