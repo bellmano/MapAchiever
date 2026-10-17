@@ -23,7 +23,7 @@
 ## Testing
 
 - Create the coverage output directory first: `New-Item -ItemType Directory -Force coverage` in PowerShell (or `mkdir -p coverage` on Linux/macOS)
-- Set LuaCov's config path to `tools/.luacov` before running the tests: `$env:LUACOV_CONFIG = "tools/.luacov"` in PowerShell (or `export LUACOV_CONFIG=tools/.luacov` on Linux/macOS)
+- Set LuaCov's config path to `tools/luacov.lua` before running the tests: `$env:LUACOV_CONFIG = "tools/luacov.lua"` in PowerShell (or `export LUACOV_CONFIG=tools/luacov.lua` on Linux/macOS)
 - Run the automated addon tests and verify 100% line coverage with `lua5.1 -lluacov tests/run.lua`, `lua5.1 tools/sonar_coverage.lua`, and `lua5.1 tools/check_coverage.lua`
 - Test addon changes in World of Warcraft before submitting a PR
 

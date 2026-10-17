@@ -23,7 +23,7 @@ jobs:
       - name: Test and measure coverage
         run: |
           mkdir -p coverage
-          export LUACOV_CONFIG=tools/.luacov
+          export LUACOV_CONFIG=tools/luacov.lua
           lua5.1 -lluacov tests/run.lua
           lua5.1 tools/sonar_coverage.lua
           lua5.1 tools/check_coverage.lua
